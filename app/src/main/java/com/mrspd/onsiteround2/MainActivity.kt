@@ -59,11 +59,11 @@ class MainActivity : AppCompatActivity() {
         override fun run() {
             mMillisecind = SystemClock.uptimeMillis() - tStart
             mUpdatetime = mLOL + mMillisecind
-            sec = (mUpdatetime / 250).toInt()
+            sec = (mUpdatetime / 15.625).toInt()
             min = sec  / 60
-            sec %= 60 * 4
+            sec %= 60 * 4 *4*4
             milliSec = (mUpdatetime % 250).toInt()
-            handler!!.postDelayed(this, 60)
+            handler!!.postDelayed(this, 0)
         }
     }
 

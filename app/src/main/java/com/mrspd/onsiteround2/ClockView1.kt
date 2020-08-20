@@ -81,7 +81,7 @@ class ClockView1 : View {
     }
 
     private fun drawMinHand(canvas: Canvas, min: Int) {
-        val angle = Math.PI * min / 16 - Math.PI / 2
+        val angle = Math.PI * min / 200 - Math.PI / 2
         val handRadius = (radius - handTruncation) / 4
         canvas.drawLine(
             width / 3.toFloat(),
@@ -93,7 +93,7 @@ class ClockView1 : View {
     }
 
     private fun drawSecondHAnd(canvas: Canvas, loc: Double) {
-        val angle = Math.PI * loc / 120 - Math.PI / 2
+        val angle = Math.PI * loc / 1400 - Math.PI / 2
         val handRadius = radius - handTruncation
         canvas.drawLine(
             width / 2.toFloat(),
