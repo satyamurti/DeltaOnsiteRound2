@@ -20,6 +20,7 @@ class ClockView1 : View {
     private var paint: Paint? = null
     private var isInit = false
     private val numbers = intArrayOf(5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60)
+    private val numbers2 = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8)
     private val rect = Rect()
 
     constructor(context: Context?) : super(context) {}
@@ -80,19 +81,19 @@ class ClockView1 : View {
     }
 
     private fun drawMinHand(canvas: Canvas, min: Int) {
-        val angle = Math.PI * min / 30 - Math.PI / 2
+        val angle = Math.PI * min / 16 - Math.PI / 2
         val handRadius = (radius - handTruncation) / 4
         canvas.drawLine(
             width / 3.toFloat(),
             height / 2.toFloat(),
-            (width / 3+ Math.cos(angle) * handRadius).toFloat(),
+            (width / 3 + Math.cos(angle) * handRadius).toFloat(),
             (height / 2 + Math.sin(angle) * handRadius).toFloat(),
             paint!!
         )
     }
 
     private fun drawSecondHAnd(canvas: Canvas, loc: Double) {
-        val angle = Math.PI * loc / 30 - Math.PI / 2
+        val angle = Math.PI * loc / 120 - Math.PI / 2
         val handRadius = radius - handTruncation
         canvas.drawLine(
             width / 2.toFloat(),
@@ -104,23 +105,29 @@ class ClockView1 : View {
     }
 
     private fun drawNumbers(canvas: Canvas, isMin: Boolean) {
-        for (number in numbers) {
+        for (number in numbers2) {
             val tmp = number.toString()
             paint!!.getTextBounds(tmp, 0, tmp.length, rect)
-            val angle = Math.PI / 6 * ((number / 5) - 3)
+            val angle = Math.PI / 4  * ((number) - 3)
             if (!isMin) {
-                paint!!.textSize = fontsize.toFloat()
-                val x =
-                    (width / 2 + Math.cos(angle) * radius - rect.width() / 2).toInt()
-                val y =
-                    (height / 2 + Math.sin(angle) * radius + rect.height() / 2).toInt()
-                canvas.drawText(tmp, x.toFloat(), y.toFloat(), paint!!)
-            } else {
                 paint!!.textSize = fontsize / 2.toFloat()
                 val x =
                     (width / 3 + Math.cos(angle) * radius / 3.5 - rect.width() / 2).toInt()
                 val y =
                     (height / 2 + Math.sin(angle) * radius / 3.5 + rect.height() / 2).toInt()
+                canvas.drawText(tmp, x.toFloat(), y.toFloat(), paint!!)
+            }
+        }
+        for (number in numbers) {
+            val tmp = number.toString()
+            paint!!.getTextBounds(tmp, 0, tmp.length, rect)
+            val angle = Math.PI / 6 * ((number / 5) - 3)
+            if (isMin) {
+                paint!!.textSize = fontsize.toFloat()
+                val x =
+                    (width / 2 + Math.cos(angle) * radius - rect.width() / 2).toInt()
+                val y =
+                    (height / 2 + Math.sin(angle) * radius + rect.height() / 2).toInt()
                 canvas.drawText(tmp, x.toFloat(), y.toFloat(), paint!!)
             }
         }
